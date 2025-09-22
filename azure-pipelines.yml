@@ -49,6 +49,12 @@ stages:
         command: 'restore'
         projects: '**/*.csproj'
 
+    - task: UseDotNet@2
+      displayName: 'Install .NET 8 runtime'
+      inputs:
+        packageType: 'runtime'
+        version: '8.0.x'
+
     - task: DotNetCoreCLI@2
       displayName: 'Build the project - $(buildConfiguration)'
       inputs:
