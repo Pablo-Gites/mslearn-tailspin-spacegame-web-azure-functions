@@ -50,10 +50,19 @@ stages:
         projects: '**/*.csproj'
 
     - task: UseDotNet@2
+      displayName: 'Install .NET 8 SDK'
+      inputs:
+        packageType: 'sdk'
+        version: '8.0.x'
+
+    - task: UseDotNet@2
       displayName: 'Install .NET 8 runtime'
       inputs:
         packageType: 'runtime'
         version: '8.0.x'
+
+    - script: dotnet nuget locals all --clear
+      displayName: 'Clear NuGet cache'
 
     - task: DotNetCoreCLI@2
       displayName: 'Build the project - $(buildConfiguration)'
